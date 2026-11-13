@@ -1,0 +1,303 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+  <meta name="theme-color" content="#080d18">
+
+  <meta name="description"
+    content="CRICK BHAI - Watch live cricket matches.">
+
+  <title>CRICK BHAI | Live Cricket</title>
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="app-header">
+
+    <div class="header-left">
+      <a href="index.html" class="brand">
+        <span class="brand-icon">C</span>
+        <span>CRICK <strong>BHAI</strong></span>
+      </a>
+    </div>
+
+    <div class="header-right">
+
+      <span class="live-indicator">
+        <span class="live-dot"></span>
+        LIVE
+      </span>
+
+      <button
+        class="profile-button"
+        id="profileButton"
+        aria-label="Profile"
+        type="button">
+
+        <svg viewBox="0 0 24 24"
+          width="23"
+          height="23"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round">
+
+          <circle cx="12" cy="8" r="4"></circle>
+          <path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"></path>
+
+        </svg>
+
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+
+      <div class="section-heading">
+        <div>
+          <span class="section-eyebrow">DON'T MISS THE ACTION</span>
+          <h1>Currently Live Matches</h1>
+        </div>
+      </div>
+
+
+      <!-- MAIN FEATURED MATCH -->
+      <article class="featured-match">
+
+        <a href="main VD/main.html"
+          class="featured-poster-link"
+          aria-label="Watch India vs New Zealand">
+
+          <div class="featured-poster">
+
+            <!-- MAIN MATCH POSTER IMAGE -->
+            <img
+              src="main VD/poster.jpg"
+              alt="India vs New Zealand Match Poster"
+              class="featured-image">
+
+            <div class="poster-overlay"></div>
+
+            <div class="featured-content">
+
+              <span class="match-live-badge">
+                <span class="live-dot"></span>
+                LIVE NOW
+              </span>
+
+              <span class="featured-label">
+                FEATURED MATCH
+              </span>
+
+              <h2>India vs New Zealand</h2>
+
+              <p>
+                Watch the live match now
+              </p>
+
+              <span class="watch-button">
+                Watch Live
+                <span aria-hidden="true">→</span>
+              </span>
+
+            </div>
+
+          </div>
+
+        </a>
+
+      </article>
+
+    </section>
+
+
+    <!-- OTHER LIVE MATCHES -->
+    <section class="other-matches">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="section-eyebrow">MORE LIVE ACTION</span>
+          <h2>Other Live Matches</h2>
+        </div>
+
+        <span class="match-count">03 MATCHES</span>
+
+      </div>
+
+
+      <div class="match-grid">
+
+
+        <!-- MATCH 02 -->
+        <a href="snd VD/snd.html"
+          class="match-card">
+
+          <div class="match-poster">
+
+            <img
+              src="snd VD/snd.html/poster.jpg"
+              alt="Match 2 Poster"
+              class="match-image">
+
+            <span class="card-live-badge">
+              <span class="live-dot"></span>
+              LIVE
+            </span>
+
+            <span class="card-number">02</span>
+
+          </div>
+
+          <div class="match-info">
+
+            <span class="match-category">
+              LIVE MATCH
+            </span>
+
+            <h3>Match 02</h3>
+
+            <p>Watch live cricket</p>
+
+            <span class="card-arrow">→</span>
+
+          </div>
+
+        </a>
+
+
+        <!-- MATCH 03 -->
+        <a href="third VD/index.html"
+          class="match-card">
+
+          <div class="match-poster">
+
+            <img
+              src="third VD/poster.jpg"
+              alt="Match 3 Poster"
+              class="match-image">
+
+            <span class="card-live-badge">
+              <span class="live-dot"></span>
+              LIVE
+            </span>
+
+            <span class="card-number">03</span>
+
+          </div>
+
+          <div class="match-info">
+
+            <span class="match-category">
+              LIVE MATCH
+            </span>
+
+            <h3>Match 03</h3>
+
+            <p>Watch live cricket</p>
+
+            <span class="card-arrow">→</span>
+
+          </div>
+
+        </a>
+
+
+        <!-- MATCH 04 -->
+        <a href="fourth VD/index.html"
+          class="match-card">
+
+          <div class="match-poster">
+
+            <img
+              src="fourth VD/poster.jpg"
+              alt="Match 4 Poster"
+              class="match-image">
+
+            <span class="card-live-badge">
+              <span class="live-dot"></span>
+              LIVE
+            </span>
+
+            <span class="card-number">04</span>
+
+          </div>
+
+          <div class="match-info">
+
+            <span class="match-category">
+              LIVE MATCH
+            </span>
+
+            <h3>Match 04</h3>
+
+            <p>Watch live cricket</p>
+
+            <span class="card-arrow">→</span>
+
+          </div>
+
+        </a>
+
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- PROFILE NOTIFICATION -->
+  <div
+    class="notification"
+    id="notification"
+    role="status"
+    aria-live="polite">
+
+    Currently this is not available.
+    We are working on this.
+
+  </div>
+
+
+  <!-- FOOTER -->
+  <footer class="app-footer">
+
+    <div class="footer-brand">
+      CRICK <strong>BHAI</strong>
+    </div>
+
+    <p>
+      Your cricket destination.
+    </p>
+
+    <span class="copyright">
+      © 2026 CRICK BHAI. All rights reserved.
+    </span>
+
+  </footer>
+
+
+  <!-- MAIN JAVASCRIPT -->
+  <script src="app.js"></script>
+
+</body>
+</html>
