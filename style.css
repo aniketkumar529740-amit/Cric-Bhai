@@ -1009,3 +1009,93 @@ button:focus-visible {
 /* =========================================
    END OF CRICK BHAI APP CSS
 ========================================= */
+
+
+
+
+/* ADMIN LOGIN MODAL */
+
+[hidden] {
+    display: none !important;
+}
+
+.admin-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.78);
+}
+
+.admin-modal-card {
+    position: relative;
+    width: 100%;
+    max-width: 390px;
+    padding: 30px;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 18px;
+    background: #101827;
+    color: #fff;
+    box-shadow: 0 20px 70px rgba(0,0,0,0.5);
+}
+
+.admin-modal-card h2 {
+    margin: 0 0 8px;
+    font-size: 25px;
+}
+
+.admin-modal-card p {
+    color: #aab4c5;
+    font-size: 14px;
+}
+
+.admin-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    border: 0;
+    background: transparent;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.admin-modal-card label {
+    display: block;
+    margin: 18px 0 7px;
+    font-size: 13px;
+}
+
+.admin-modal-card input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #344155;
+    border-radius: 9px;
+    outline: none;
+    background: #080f1c;
+    color: white;
+}
+
+.admin-modal-card input:focus {
+    border-color: #38a5ff;
+}
+
+.admin-modal-card form button,
+#adminLogout {
+    width: 100%;
+    margin-top: 20px;
+    padding: 13px;
+    border: 0;
+    border-radius: 9px;
+    background: #1685e8;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#adminLoginError {
+    color: #ff7070;
+}
