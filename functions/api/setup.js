@@ -32,7 +32,7 @@ async function hashPassword(password) {
 
 export async function onRequestPost({ request, env }) {
     try {
-        // 1. Check setup key
+        // 1. Verify setup authorization
         const auth = request.headers.get("Authorization");
 
         if (!env.SETUP_KEY) {
@@ -57,7 +57,7 @@ export async function onRequestPost({ request, env }) {
             );
         }
 
-        // 2. Check admin credentials
+        // 2. Read initial admin credentials
         const username = env.INITIAL_ADMIN_USERNAME;
         const password = env.INITIAL_ADMIN_PASSWORD;
 
@@ -72,7 +72,7 @@ export async function onRequestPost({ request, env }) {
             );
         }
 
-        // 3. Check database binding
+        // 3. Validate database binding
         if (!env.DB) {
             return Response.json(
                 {
@@ -84,7 +84,7 @@ export async function onRequestPost({ request, env }) {
             );
         }
 
-        // 4. Check admins table
+        // 4. Check whether an admin already exists
         const existing = await env.DB
             .prepare("SELECT id FROM admins LIMIT 1")
             .first();
@@ -100,30 +100,34 @@ export async function onRequestPost({ request, env }) {
             );
         }
 
-        // 5. Hash password
+        // 5. Hash the admin password
         const passwordHash = await hashPassword(password);
 
-        // 6. Create admin account
+        // 6. Insert admin into D1
         await env.DB.prepare(
             "INSERT INTO admins (username, password_hash) VALUES (?, ?)"
         )
             .bind(username, passwordHash)
             .run();
 
-        return Response.json({
-            success: true,
-            message: "Admin account created successfully."
-        });
+        return Response.json(
+            {
+                success: true,
+                message: "Admin account created successfully."
+            },
+            { status: 201 }
+        );
 
-   } catch (error) {
-    console.error("ADMIN_SETUP_ERROR:", error);
+    } catch (error) {
+        console.error("ADMIN_SETUP_ERROR:", error);
 
-    return Response.json(
-        {
-            success: false,
-            code: "SETUP_FAILED",
-            message: "Setup failed. Check Cloudflare Functions logs."
-        },
-        { status: 500 }
-    );
+        return Response.json(
+            {
+                success: false,
+                code: "SETUP_FAILED",
+                message: "Setup failed. Check Cloudflare Functions logs."
+            },
+            { status: 500 }
+        );
+    }
 }
