@@ -32,50 +32,96 @@ async function hashPassword(password) {
 
 export async function onRequestPost({ request, env }) {
     try {
+        // 1. Check setup key
         const auth = request.headers.get("Authorization");
 
-        if (!env.SETUP_KEY || auth !== `Bearer ${env.SETUP_KEY}`) {
+        if (!env.SETUP_KEY) {
             return Response.json(
-                { success: false, message: "Unauthorized" },
+                {
+                    success: false,
+                    code: "SETUP_KEY_MISSING",
+                    message: "SETUP_KEY is missing in Cloudflare environment."
+                },
+                { status: 500 }
+            );
+        }
+
+        if (auth !== `Bearer ${env.SETUP_KEY}`) {
+            return Response.json(
+                {
+                    success: false,
+                    code: "INVALID_SETUP_KEY",
+                    message: "Authorization key does not match SETUP_KEY."
+                },
                 { status: 401 }
             );
         }
 
+        // 2. Check admin credentials
         const username = env.INITIAL_ADMIN_USERNAME;
         const password = env.INITIAL_ADMIN_PASSWORD;
 
         if (!username || !password) {
             return Response.json(
-                { success: false, message: "Admin secrets missing" },
+                {
+                    success: false,
+                    code: "ADMIN_SECRETS_MISSING",
+                    message: "Admin username or password is missing."
+                },
                 { status: 500 }
             );
         }
 
+        // 3. Check database binding
+        if (!env.DB) {
+            return Response.json(
+                {
+                    success: false,
+                    code: "DATABASE_BINDING_MISSING",
+                    message: "D1 database binding DB is missing."
+                },
+                { status: 500 }
+            );
+        }
+
+        // 4. Check admins table
         const existing = await env.DB
             .prepare("SELECT id FROM admins LIMIT 1")
             .first();
 
         if (existing) {
             return Response.json(
-                { success: false, message: "Admin already exists" },
+                {
+                    success: false,
+                    code: "ADMIN_ALREADY_EXISTS",
+                    message: "Admin account already exists."
+                },
                 { status: 409 }
             );
         }
 
+        // 5. Hash password
         const passwordHash = await hashPassword(password);
 
+        // 6. Create admin account
         await env.DB.prepare(
             "INSERT INTO admins (username, password_hash) VALUES (?, ?)"
-        ).bind(username, passwordHash).run();
+        )
+            .bind(username, passwordHash)
+            .run();
 
         return Response.json({
             success: true,
-            message: "Admin account created"
+            message: "Admin account created successfully."
         });
 
     } catch (error) {
         return Response.json(
-            { success: false, message: "Setup failed" },
+            {
+                success: false,
+                code: "SETUP_FAILED",
+                message: "Setup failed. Check Cloudflare Functions logs."
+            },
             { status: 500 }
         );
     }
