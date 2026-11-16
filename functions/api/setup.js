@@ -115,14 +115,15 @@ export async function onRequestPost({ request, env }) {
             message: "Admin account created successfully."
         });
 
-    } catch (error) {
-        return Response.json(
-            {
-                success: false,
-                code: "SETUP_FAILED",
-                message: "Setup failed. Check Cloudflare Functions logs."
-            },
-            { status: 500 }
-        );
-    }
+   } catch (error) {
+    console.error("ADMIN_SETUP_ERROR:", error);
+
+    return Response.json(
+        {
+            success: false,
+            code: "SETUP_FAILED",
+            message: "Setup failed. Check Cloudflare Functions logs."
+        },
+        { status: 500 }
+    );
 }
