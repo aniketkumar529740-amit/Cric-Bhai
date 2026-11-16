@@ -97,7 +97,7 @@ img {
   align-items: center;
   justify-content: space-between;
 
-  padding: 0 5.5%;
+  padding: .5%;
 
   background: rgba(8,13,24,0.96);
   border-bottom: 1px solid var(--border-color);
@@ -107,7 +107,19 @@ img {
   z-index: 1000;
 }
 
-.header-left,
+.header-left{
+  display: flex;
+  align-items: center;
+}
+
+.header-left img {
+  width: 60px;
+  height: 60px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+
 .header-right {
   display: flex;
   align-items: center;
